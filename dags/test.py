@@ -39,5 +39,5 @@ def basic_tests():
     def task_a():
         print("hello from Teja here..")
 
-    task()
+    task_a()
 basic_tests()
