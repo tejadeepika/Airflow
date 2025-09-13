@@ -40,8 +40,8 @@ def _task_a():
 )
 def task_flow():
     task_a = PythonOperator(
-        task_id= 'task_a'
-        python_callable='task_a'
+        task_id= 'teja_deepika',
+        python_callable=_task_a
     )
     @task
     def task_b(value):
