@@ -2,8 +2,6 @@ from __future__ import annotations
 
 import time
 
-import pendulum
-
 from airflow.decorators import dag, task
 from datetime import datetime
 from airflow.operators.python import PythonOperator
