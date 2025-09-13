@@ -32,12 +32,15 @@ from datetime import datetime
     start_date=datetime(2023, 1, 1),
     schedule='@daily',
     catchup=False,
-    tags=['basic_tests']
+    tags=['task_flow']
 )
-def basic_tests():
+def task_flow():
     @task
     def task_a():
         print("hello from Teja here..")
-
-    task_a()
-basic_tests()
+        return 42
+    @def task_b():
+        print("Hello Vishnu")
+        print(value)
+    task_b(task_a())
+task_flow()
