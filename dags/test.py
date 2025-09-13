@@ -33,8 +33,8 @@ def _task_a():
 
 @dag(
     dag_id="basic_test_dag",
-    start_date=datetime(2023, 1, 1),
-    schedule='@daily',
+    start_date=datetime(2025, 9, 13, 10),
+    schedule='*/1 * * * *',
     catchup=False,
     tags=['task_flow']
 )
@@ -47,6 +47,7 @@ def task_flow():
     def task_b(value):
         print("Hello Vishnu")
         print(value)
+
     task_b(task_a.output)
 
 task_flow()
