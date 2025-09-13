@@ -4,7 +4,7 @@ import pendulum
 
 from airflow.decorators import dag, task
 from datetime import datetime
-
+from airflow.operators.python import PythonOperator
 # with DAG(
 #     dag_id="basic_test_dag",
 #     start_date=pendulum.datetime(2023, 1, 1, tz="UTC"),
@@ -39,7 +39,8 @@ def task_flow():
     def task_a():
         print("hello from Teja here..")
         return 42
-    @def task_b():
+    @task
+    def task_b():
         print("Hello Vishnu")
         print(value)
     task_b(task_a())
