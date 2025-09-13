@@ -4,7 +4,7 @@ import time
 
 from airflow.decorators import dag, task
 from datetime import datetime
-from airflow.hooks.base import Basehook
+from airflow.hooks.base import BaseHook
 from airflow.operators.python import PythonOperator
 from wtforms.validators import none_of
 
