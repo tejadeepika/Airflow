@@ -35,7 +35,7 @@ def _task_a():
     dag_id="basic_test_dag",
     start_date=datetime(2025, 9, 13, 10),
     schedule='*/1 * * * *',
-    catchup=False,
+    catchup=True,
     tags=['task_flow']
 )
 def task_flow():
