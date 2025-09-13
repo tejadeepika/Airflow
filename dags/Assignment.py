@@ -5,6 +5,7 @@ import time
 from airflow.decorators import dag, task
 from datetime import datetime
 from airflow.operators.python import PythonOperator
+import random
 
 @dag(
     dag_id= 'random_number_check',
