@@ -21,7 +21,7 @@ def random_number_check():
         print('Generated random number: {number}')
         return number
     @task
-    def check_odd():
+    def check_odd(number):
         result ='even' if number % 2 == 0 else 'odd'
         print('The number {number} is {result}')
 
