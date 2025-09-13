@@ -4,28 +4,10 @@ import time
 
 from airflow.decorators import dag, task
 from datetime import datetime
+from airflow.hooks.base import Basehook
 from airflow.operators.python import PythonOperator
-# with DAG(
-#     dag_id="basic_test_dag",
-#     start_date=pendulum.datetime(2023, 1, 1, tz="UTC"),
-#     schedule=None,
-#     catchup=False,
-#     tags=["basic_tests"],
-# ) as dag:
-#     # Task 1: A simple BashOperator to print a message
-#     task1 = BashOperator(
-#         task_id="print_hello",
-#         bash_command="echo 'Hello from Task 1!'",
-#     )
-#
-#     # Task 2: A simple BashOperator to print a different message
-#     task2 = BashOperator(
-#         task_id="print_world",
-#         bash_command="echo 'Hello from Task 2!'",
-#     )
-#
-#     # Set the dependency: Task 1 must run before Task 2
-#     task1 >> task2
+from wtforms.validators import none_of
+
 
 def _task_a():
     time.sleep(10)
@@ -50,5 +32,16 @@ def task_flow():
         print(value)
 
     task_b(task_a.output)
+def stock_market():
+    @task.sensor(pokeinterval=30, timeout=300, mode='poke')
+    def is_api_available() -> PokeReturnValue:
+        import request
+        api= Basehook.get_connection('stock_api')
+        url = f"{api.host}{api.extra_dejson['endpoint']}"
+        print(url)
+        response = requests.get(url,headers=api.extra_dejson['headers'])
+        condition= response.jsom()['finance']['result']is none
+        return PokeReturnValue(is_done=condition, xcom_value=response.json())
 
+    is_api_available()
 task_flow()

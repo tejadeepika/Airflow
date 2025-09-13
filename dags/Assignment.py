@@ -7,6 +7,9 @@ from datetime import datetime
 from airflow.operators.python import PythonOperator
 import random
 
+from airflow.sensors.base import PokeReturnValue
+
+
 @dag(
     dag_id= 'random_number_check',
     start_date=datetime(2025, 9, 11),
@@ -31,6 +34,7 @@ def random_number_check():
         print(f'The number {number} is {result}')
 
     random_number() >> check_odd()
+
 
 random_number_check()
 
