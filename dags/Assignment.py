@@ -9,9 +9,9 @@ import random
 
 @dag(
     dag_id= 'random_number_check',
-    start_date=datetime(2025, 9, 13, 10),
+    start_date=datetime(2025, 9, 11),
     schedule='@daily',
-    catchup=False,
+    catchup=True,
     tags=['taskflow']
 )
 def random_number_check():
@@ -31,5 +31,6 @@ def random_number_check():
         print(f'The number {number} is {result}')
 
     random_number() >> check_odd()
+
 random_number_check()
 
