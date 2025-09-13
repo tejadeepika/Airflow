@@ -35,13 +35,16 @@ from airflow.operators.python import PythonOperator
     tags=['task_flow']
 )
 def task_flow():
+
     @task
     def task_a():
         print("hello from Teja here..")
         return 42
+
     @task
-    def task_b():
+    def task_b(value):
         print("Hello Vishnu")
         print(value)
+
     task_b(task_a())
 task_flow()
