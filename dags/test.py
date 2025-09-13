@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import time
+
 import pendulum
 
 from airflow.decorators import dag, task
@@ -28,6 +30,7 @@ from airflow.operators.python import PythonOperator
 #     task1 >> task2
 
 def _task_a():
+    time.sleep(10)
     print("hello from Teja here..")
     return 42
 
