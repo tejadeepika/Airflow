@@ -23,6 +23,7 @@ def random_number_check():
         number=random.randint(1, 100)
         print(f'Generated random number: {number}')
 
+
         ti = context['ti']
         ti.xcom_push(key='random', value=number)
 
