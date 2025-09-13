@@ -16,15 +16,20 @@ import random
 )
 def random_number_check():
     @task
-    def random_number():
+    def random_number(**context):
         number=random.randint(1, 100)
-        print('Generated random number: {number}')
-        return number
-    @task
-    def check_odd(number):
-        result ='even' if number % 2 == 0 else 'odd'
-        print('The number {number} is {result}')
+        print(f'Generated random number: {number}')
 
-    check_odd(random_number)
+        ti = context['ti']
+        ti.xcom_push(key='random', value=number)
+
+    @task
+    def check_odd(**context):
+        ti = context['ti']
+        number = ti.xcom_pull(task_ids='random_number', key='random')
+        result ='even' if number % 2 == 0 else 'odd'
+        print(f'The number {number} is {result}')
+
+    random_number() >> check_odd()
 random_number_check()
 
