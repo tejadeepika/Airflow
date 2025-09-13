@@ -27,6 +27,10 @@ from airflow.operators.python import PythonOperator
 #     # Set the dependency: Task 1 must run before Task 2
 #     task1 >> task2
 
+def _task_a():
+    print("hello from Teja here..")
+    return 42
+
 @dag(
     dag_id="basic_test_dag",
     start_date=datetime(2023, 1, 1),
@@ -35,16 +39,14 @@ from airflow.operators.python import PythonOperator
     tags=['task_flow']
 )
 def task_flow():
-
-    @task
-    def task_a():
-        print("hello from Teja here..")
-        return 42
-
+    task_a = PythonOperator(
+        task_id= 'task_a'
+        python_callable='task_a'
+    )
     @task
     def task_b(value):
         print("Hello Vishnu")
         print(value)
+    task_b(task_a.output)
 
-    task_b(task_a())
 task_flow()
