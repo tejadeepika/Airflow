@@ -19,7 +19,7 @@ default_args = {
 dag = DAG(
     "twitter_dag"
     default_args=default_args,
-    description='Our first DAG with ETL process!'
+    description='My first etl code'
 )
 
 run_etl= PythonOperator(
@@ -27,3 +27,5 @@ run_etl= PythonOperator(
     python_callable=run_twitter_etl,
     dag=dag
 )
+
+run_etl
